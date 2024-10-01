@@ -22,14 +22,14 @@ jobs:
         run: |
           sudo apt-get update -yqq
           sudo bash build-kernel
-          cp linux-msft-wsl-*/vmlinux .
-      - name: Upload Kernel
+          cp linux-msft-wsl-*/arch/x86/boot/bzImage .
+      - name: Upload bzImage
         uses: actions/upload-artifact@v3
         with:
-          name: vmlinux
-          path: vmlinux
+          name: bzImage
+          path: bzImage
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: vmlinux
+          files: bzImage
